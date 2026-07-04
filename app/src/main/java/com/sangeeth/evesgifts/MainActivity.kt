@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.sangeeth.evesgifts.navigation.AppNavHost
 import com.sangeeth.evesgifts.navigation.BottomBar
-import com.sangeeth.evesgifts.ui.home.FloatingActionButton
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

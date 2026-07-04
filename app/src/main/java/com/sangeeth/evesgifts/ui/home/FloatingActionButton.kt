@@ -1,6 +1,5 @@
 package com.sangeeth.evesgifts.ui.home
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.updateTransition
@@ -39,15 +38,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sangeeth.evesgifts.R
 
-@Preview
 @Composable
 fun FloatingActionButton() {
 
     var expanded by remember { mutableStateOf(false) }
+    var selectedItem by remember { mutableStateOf<String?>(null) }
+
     val items = listOf(
         FabItems(icon = R.drawable.ic_frames, title = "Frames"),
         FabItems(icon = R.drawable.ic_cakes, title = "Cakes"),
@@ -57,14 +56,21 @@ fun FloatingActionButton() {
 
         AnimatedVisibility(
             visible = expanded,
-            enter = fadeIn() + slideInVertically(initialOffsetY = {it}) + expandVertically(),
-            exit = fadeOut() + slideOutVertically(targetOffsetY = {it}) + shrinkVertically(),
+            enter = fadeIn() + slideInVertically(initialOffsetY = { it }) + expandVertically(),
+            exit = fadeOut() + slideOutVertically(targetOffsetY = { it }) + shrinkVertically(),
         ) {
 
             LazyColumn(modifier = Modifier.padding(8.dp)) {
-                items(items.size){
+                items(items.size) {
 
-                    itemUI(icon = items[it].icon, title = items[it].title)
+                    itemUI(
+                        icon = items[it].icon,
+                        title = items[it].title,
+                        onClick = { title ->
+                            expanded = false
+                            selectedItem = title
+                        }
+                    )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
@@ -91,9 +97,21 @@ fun FloatingActionButton() {
             )
         }
     }
+
+    when(selectedItem) {
+        "Frames" -> {
+            FramesScreen(onDismiss = {selectedItem=null})
+        }
+    }
 }
+
 @Composable
-fun itemUI(icon: Int, title: String) {
+fun itemUI(
+    icon: Int,
+    title: String,
+    onClick: (String) -> Unit
+) {
+
 
     val context = LocalContext.current
     Row(
@@ -102,17 +120,28 @@ fun itemUI(icon: Int, title: String) {
     ) {
         Spacer(modifier = Modifier.weight(1f))
         Box(
-            modifier = Modifier.border(
-                width = 2.dp,
-                color = colorResource(R.color.primary_color),
-                shape = RoundedCornerShape(10.dp)
-            ).padding(6.dp)
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    color = colorResource(R.color.primary_color),
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .padding(6.dp)
         ) {
             Text(text = title)
         }
         Spacer(modifier = Modifier.width(10.dp))
         FloatingActionButton(
-            onClick = { Toast.makeText(context, title, Toast.LENGTH_SHORT).show()},
+            onClick = {
+                onClick(title)
+//                Toast.makeText(context, title, Toast.LENGTH_SHORT).show(),
+
+//                when (title) {
+//                    "Frames" -> navController.navigate("frames")
+//                    "Editor" -> print("User can edit content")
+//                    else -> print("User role is not recognized")
+//                }
+            },
             modifier = Modifier.size(45.dp),
             containerColor = colorResource(R.color.primary_color)
         ) {
