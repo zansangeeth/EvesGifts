@@ -21,7 +21,7 @@ fun BottomBar(navController: NavController){
     NavigationBar(
         containerColor = colorResource(color.primary_color)
     ) {
-        bottomNavItems.forEach { item->
+        bottomNavItems.forEach { item ->
             NavigationBarItem(
                 selected = currentRoute == item.route,
                 onClick = {
