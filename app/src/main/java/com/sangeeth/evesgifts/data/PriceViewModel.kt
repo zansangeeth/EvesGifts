@@ -1,6 +1,8 @@
 package com.sangeeth.evesgifts.data
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -8,26 +10,28 @@ import kotlinx.coroutines.launch
 class PriceViewModel : ViewModel() {
     private val repository = PriceRepository(RetrofitClient.api)
 
-    var state = mutableStateOf<PriceResponse?>(null)
+    var prices by mutableStateOf<PriceResponse?>(null)
         private set
 
-    var loading = mutableStateOf(false)
+    var loading by mutableStateOf(false)
         private set
 
-    var error = mutableStateOf<String?>(null)
+    var error by mutableStateOf<String?>(null)
         private set
 
+    init {
+        loadData()
+    }
     fun loadData() {
         viewModelScope.launch {
-            loading.value = true
-            error.value = null
+            loading = true
 
             try {
-                state.value = repository.fetchPrices()
+                prices = repository.fetchPrices()
             }catch (e: Exception){
-                error.value = e.message
+                error = e.localizedMessage
             }
-            loading.value = false
+            loading = false
         }
 
     }

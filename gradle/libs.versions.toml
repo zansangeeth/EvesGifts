@@ -37,7 +37,7 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-compose-material3-adaptive-navigation-suite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite" }
 compose-material-icons = { group = "androidx.compose.material", name = "material-icons-core" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
-kotlinx-coroutines-andorid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-andorid", version.ref = "kotlinxCoroutinesAndorid" }
+kotlinx-coroutines-andorid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndorid" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
