@@ -102,6 +102,12 @@ fun FloatingActionButton() {
         "Frames" -> {
             FramesScreen(onDismiss = {selectedItem=null})
         }
+        "Cakes" -> {
+            CakesScreen(onDismiss = {selectedItem=null})
+        }
+        "Gifts" -> {
+            GiftsScreen(onDismiss = {selectedItem=null})
+        }
     }
 }
 
