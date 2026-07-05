@@ -10,8 +10,7 @@ Time spent: TBA - building in progress
 
 UI | Custom FBA | Custom Bottom Nav Bar |
 --- |------------| --- | --- |
-Images | ![img_8.png](img_8.png) | ![img_6.png](img_6.png) |
-
+Images | ![ezgif-2d0c55dac94e1004.gif](../../../Desktop/ezgif-2d0c55dac94e1004.gif) | ![img_6.png](img_6.png) |
 
 ## Functionality
 
