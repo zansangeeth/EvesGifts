@@ -19,6 +19,9 @@ class PriceViewModel : ViewModel() {
     var error by mutableStateOf<String?>(null)
         private set
 
+    var selectedFrame by mutableStateOf<SelectedFrame?>(null)
+        private set
+
     init {
         loadData()
     }
@@ -33,6 +36,23 @@ class PriceViewModel : ViewModel() {
             }
             loading = false
         }
+    }
 
+    fun selectedFrame(category: String, size: String){
+        val price = prices
+            ?.frames
+            ?.get(category)
+            ?.get(size)
+
+        selectedFrame = SelectedFrame(
+            category = category,
+            size = size,
+            price = price
+        )
+    }
+
+    fun clearSelectedFrame(){
+        selectedFrame = null
     }
 }
+

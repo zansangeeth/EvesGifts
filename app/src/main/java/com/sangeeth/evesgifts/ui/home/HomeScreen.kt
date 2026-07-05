@@ -21,20 +21,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sangeeth.evesgifts.R
+import com.sangeeth.evesgifts.data.PriceViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
-    val isDropDownExpanded = remember {
-        mutableStateOf(false)
-    }
-    val itemPosition = remember {
-        mutableStateOf("Frames")
-    }
-    val usernames = listOf("Frames", "Cakes", "Gifts")
+fun HomeScreen(
+    viewModel: PriceViewModel
+) {
+    val selectedFrame = viewModel.selectedFrame
+
     Scaffold(
-        floatingActionButton = { FloatingActionButton() }
+        floatingActionButton = { FloatingActionButton(viewModel) }
     ) {
         Column(modifier = Modifier
             .padding(20.dp)
@@ -70,7 +68,19 @@ fun HomeScreen() {
                     unfocusedContainerColor = Color.Transparent
                 )
             )
+
+            Column {
+                Text("Frames Details")
+
+                selectedFrame?.let {
+                    Text("category: ${it.category}")
+                    Text("size: ${it.size}")
+                    Text("price: ${it.price}")
+                }
+            }
         }
+
+
     }
 }
 

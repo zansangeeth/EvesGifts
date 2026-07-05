@@ -45,11 +45,12 @@ import com.sangeeth.evesgifts.R
 import com.sangeeth.evesgifts.data.PriceViewModel
 
 @Composable
-fun FloatingActionButton() {
+fun FloatingActionButton(
+    viewModel: PriceViewModel
+) {
 
     var expanded by remember { mutableStateOf(false) }
     var selectedItem by remember { mutableStateOf<String?>(null) }
-    val priceViewModel: PriceViewModel = viewModel()
 
     val items = listOf(
         FabItems(icon = R.drawable.ic_frames, title = "Frames"),
@@ -105,10 +106,11 @@ fun FloatingActionButton() {
     when (selectedItem) {
         "Frames" -> {
             FramesScreen(
-                viewModel = priceViewModel,
+                viewModel = viewModel,
                 onDismiss = { selectedItem = null },
                 onConfirm = { category, size ->
-                    val price = priceViewModel.prices
+                    viewModel.selectedFrame(category, size)
+                    val price = viewModel.prices
                         ?.frames
                         ?.get(category)
                         ?.get(size)
@@ -133,9 +135,6 @@ fun itemUI(
     title: String,
     onClick: (String) -> Unit
 ) {
-
-
-    val context = LocalContext.current
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End,
@@ -156,13 +155,6 @@ fun itemUI(
         FloatingActionButton(
             onClick = {
                 onClick(title)
-//                Toast.makeText(context, title, Toast.LENGTH_SHORT).show(),
-
-//                when (title) {
-//                    "Frames" -> navController.navigate("frames")
-//                    "Editor" -> print("User can edit content")
-//                    else -> print("User role is not recognized")
-//                }
             },
             modifier = Modifier.size(45.dp),
             containerColor = colorResource(R.color.primary_color)
