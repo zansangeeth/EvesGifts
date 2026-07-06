@@ -25,7 +25,7 @@ import com.sangeeth.evesgifts.R
 fun AddedItemCardView(item: String, size: String, price: String) {
     Card(
         modifier = Modifier
-            .padding(10.dp)
+//            .padding(10.dp)
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 5.dp
