@@ -147,7 +147,7 @@ fun HomeScreen(
                         }
 
                         Text(
-                            text = "Total: $${String.format("%.2f", viewModel.getTotalPrice())}",
+                            text = "Total: Rs${String.format("%.2f", viewModel.getTotalPrice())}",
                             modifier = Modifier.padding(top = 8.dp),
                             fontWeight = FontWeight.Bold
                         )
