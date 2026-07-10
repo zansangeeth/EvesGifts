@@ -64,7 +64,7 @@ fun GiftsScreen(
                 var expandedCategory by remember { mutableStateOf(false) }
                 ExposedDropdownMenuBox(
                     expanded = expandedCategory,
-                    onExpandedChange = {expandedCategory = !expandedCategory}
+                    onExpandedChange = { expandedCategory = !expandedCategory }
                 ) {
                     OutlinedTextField(
                         modifier = Modifier.menuAnchor(
@@ -75,7 +75,7 @@ fun GiftsScreen(
                             ?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
                             ?: "",
                         onValueChange = {},
-                        label = {Text("Gift Type")},
+                        label = { Text("Gift Type") },
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expandedCategory)
                         },
@@ -109,9 +109,9 @@ fun GiftsScreen(
                 }
 
                 //show prices
-                if (selectedCategory != null){
+                if (selectedCategory != null) {
                     val price = viewModel.prices?.gifts?.let { gifts ->
-                        when(selectedCategory){
+                        when (selectedCategory) {
                             "customized_bouquet" -> gifts.customized_bouquet.price
                             "personalized_clock" -> gifts.personalized_clock.price
                             "baby_photo_collage" -> gifts.baby_photo_collage.price
@@ -121,7 +121,7 @@ fun GiftsScreen(
                         }
                     }
 
-                    if (price != null){
+                    if (price != null) {
                         Text(
                             text = "price is $price",
                             modifier = Modifier.padding(16.dp),

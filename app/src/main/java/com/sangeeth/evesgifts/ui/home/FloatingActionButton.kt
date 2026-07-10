@@ -121,8 +121,8 @@ fun FloatingActionButton(
         }
 
         "Cakes" -> {
-            AddCakeScreen (
-                onDismiss = {selectedItem = null},
+            AddCakeScreen(
+                onDismiss = { selectedItem = null },
                 onConfirm = { category, subType ->
                     viewModel.addCake(category, subType)
                     selectedItem = null

@@ -115,8 +115,12 @@ fun HomeScreen(
 
                         selectedCake.forEach { cake ->
                             AddedItemCardView(
-                                item = cake.category.replace("_", " ")?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() } ?: "",
-                                size = cake.subType?.replace("_", " ")?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() } ?: "Standard",
+                                item = cake.category.replace("_", " ")
+                                    ?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
+                                    ?: "",
+                                size = cake.subType?.replace("_", " ")
+                                    ?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
+                                    ?: "Standard",
                                 price = cake.price.toString(),
                                 onQuantityChange = { newQuantity ->
                                     viewModel.updateCakeQuantity(
@@ -132,7 +136,8 @@ fun HomeScreen(
 
                         selectedGifts.forEach { gifts ->
                             AddedItemCardView(
-                                item = gifts.category.replace("_", " ").replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
+                                item = gifts.category.replace("_", " ")
+                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
                                     ?: "",
                                 size = "Gift",
                                 price = gifts.price ?: "N/A",

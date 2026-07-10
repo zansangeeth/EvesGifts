@@ -147,10 +147,10 @@ class PriceViewModel : ViewModel() {
         }
 
 
+    }
 
-        fun clearCakes() {
-            selectedCakes = emptyList()
-        }
+    fun clearCakes() {
+        selectedCakes = emptyList()
     }
 
     fun removeCake(cake: SelectedCake) {
@@ -167,9 +167,9 @@ class PriceViewModel : ViewModel() {
         }
     }
 
-    fun addGift(category: String, quantity: Int = 1){
+    fun addGift(category: String, quantity: Int = 1) {
         val price = prices?.gifts?.let { gifts ->
-            when(category){
+            when (category) {
                 "customized_bouquet" -> gifts.customized_bouquet.price
                 "personalized_clock" -> gifts.personalized_clock.price
                 "baby_photo_collage" -> gifts.baby_photo_collage.price
@@ -183,14 +183,14 @@ class PriceViewModel : ViewModel() {
             it.category == category
         }
 
-        if (existingIndex != -1){
+        if (existingIndex != -1) {
             selectedGifts = selectedGifts.mapIndexed { index, gifts ->
-                if (index == existingIndex){
+                if (index == existingIndex) {
                     gifts.copy(quantity = gifts.quantity + quantity)
-                }else
+                } else
                     gifts
             }
-        }else{
+        } else {
             val newGift = SelectedGifts(
                 category = category,
                 price = price,
@@ -200,23 +200,24 @@ class PriceViewModel : ViewModel() {
         }
     }
 
-    fun removeGift(gift: SelectedGifts){
+    fun removeGift(gift: SelectedGifts) {
         selectedGifts = selectedGifts.minus(gift)
     }
 
-    fun updateGiftQuantity(gifts: SelectedGifts, newQuantity: Int){
-        if (newQuantity<=0){
+    fun updateGiftQuantity(gifts: SelectedGifts, newQuantity: Int) {
+        if (newQuantity <= 0) {
             removeGift(gifts)
-        }else{
+        } else {
             selectedGifts = selectedGifts.map {
                 if (it == gifts) it.copy(quantity = newQuantity) else it
             }
         }
     }
 
-    fun clearGifts(){
+    fun clearGifts() {
         selectedGifts = emptyList()
     }
+
     fun getTotalPrice(): Double {
         val frameTotal = selectedFrames.sumOf { (it.price?.toDouble() ?: 0.0) * it.quantity }
         val cakeTotal = selectedCakes.sumOf { (it.price?.toDouble() ?: 0.0) * it.quantity }
