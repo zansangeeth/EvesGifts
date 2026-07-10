@@ -141,6 +141,7 @@ fun HomeScreen(
                                     }
                                     ?: "Standard",
                                 price = cake.price.toString(),
+                                quantity = cake.quantity,
                                 onQuantityChange = { newQuantity ->
                                     viewModel.updateCakeQuantity(
                                         cake = cake,
