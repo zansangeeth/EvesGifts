@@ -74,11 +74,16 @@ fun AddCakeScreen(
 
                 ExposedDropdownMenuBox(
                     expanded = expandedCategory,
-                    onExpandedChange = {expandedCategory = !expandedCategory}
+                    onExpandedChange = { expandedCategory = !expandedCategory }
                 ) {
                     OutlinedTextField(
-                        modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable, true),
-                        value = selectedCategory?.replace("_", " ")?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() } ?: "",
+                        modifier = Modifier.menuAnchor(
+                            ExposedDropdownMenuAnchorType.PrimaryEditable,
+                            true
+                        ),
+                        value = selectedCategory?.replace("_", " ")
+                            ?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
+                            ?: "",
                         onValueChange = {},
                         readOnly = true,
                         label = { Text("Cake Type") },
@@ -91,12 +96,15 @@ fun AddCakeScreen(
                     )
                     ExposedDropdownMenu(
                         expanded = expandedCategory,
-                        onDismissRequest = {expandedCategory = false}
+                        onDismissRequest = { expandedCategory = false }
                     ) {
                         cakeCategories.forEach { category ->
                             DropdownMenuItem(
                                 text = {
-                                    Text(category.replace("_", " ").replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() })
+                                    Text(
+                                        category.replace("_", " ").replaceFirstChar {
+                                            if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString()
+                                        })
                                 },
                                 onClick = {
                                     selectedCategory = category
@@ -110,7 +118,7 @@ fun AddCakeScreen(
 
                 Spacer(Modifier.heightIn(16.dp))
 
-                if (showSubType){
+                if (showSubType) {
                     var expandedSubType by remember { mutableStateOf(false) }
 
                     ExposedDropdownMenuBox(
@@ -120,8 +128,13 @@ fun AddCakeScreen(
                         }
                     ) {
                         OutlinedTextField(
-                            modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable, true),
-                            value = selectedSubType?.replace("_", " ")?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() } ?: "",
+                            modifier = Modifier.menuAnchor(
+                                ExposedDropdownMenuAnchorType.PrimaryEditable,
+                                true
+                            ),
+                            value = selectedSubType?.replace("_", " ")
+                                ?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
+                                ?: "",
                             onValueChange = {},
                             readOnly = true,
                             label = { Text("Cake Flavor") },
@@ -134,12 +147,15 @@ fun AddCakeScreen(
                         )
                         ExposedDropdownMenu(
                             expanded = expandedSubType,
-                            onDismissRequest = {expandedSubType = false}
+                            onDismissRequest = { expandedSubType = false }
                         ) {
                             subTypes.forEach { subType ->
                                 DropdownMenuItem(
                                     text = {
-                                        Text(subType.replace("_", " ").replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() })
+                                        Text(
+                                            subType.replace("_", " ").replaceFirstChar {
+                                                if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString()
+                                            })
                                     },
                                     onClick = {
                                         selectedSubType = subType
@@ -151,7 +167,7 @@ fun AddCakeScreen(
                     }
                 }
 
-                if(selectedCategory != null){
+                if (selectedCategory != null) {
                     val price = when {
                         selectedCategory == "birthday_cake" && selectedSubType != null -> {
                             viewModel.prices?.cakes?.birthday_cake?.let { cake ->
@@ -162,9 +178,10 @@ fun AddCakeScreen(
                                 }
                             }
                         }
+
                         else -> {
                             viewModel.prices?.cakes?.let { cakes ->
-                                when(selectedCategory) {
+                                when (selectedCategory) {
                                     "butter_cake" -> cakes.butter_cake.price
                                     "chocolate_cake" -> cakes.chocolate_cake.price
                                     "butter_cup_cake" -> cakes.butter_cup_cake.price
@@ -177,7 +194,7 @@ fun AddCakeScreen(
                         }
                     }
 
-                    if (price != null){
+                    if (price != null) {
                         Text(
                             text = "Price: Rs. $price",
                             modifier = Modifier.padding(top = 16.dp),

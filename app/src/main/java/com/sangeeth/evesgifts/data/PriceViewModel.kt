@@ -25,6 +25,9 @@ class PriceViewModel : ViewModel() {
     var selectedCakes by mutableStateOf<List<SelectedCake>>(emptyList())
         private set
 
+    var selectedGifts by mutableStateOf<List<SelectedGifts>>(emptyList())
+        private set
+
     init {
         loadData()
     }
@@ -42,6 +45,7 @@ class PriceViewModel : ViewModel() {
         }
     }
 
+    // add frames
     fun addFrame(category: String, size: String, quality: Int = 1) {
         val price = prices
             ?.frames
@@ -55,8 +59,8 @@ class PriceViewModel : ViewModel() {
         if (existingIndex != -1) {
 
             selectedFrames = selectedFrames.mapIndexed { index, frame ->
-                if (index == existingIndex){
-                   frame.copy(quantity = frame.quantity + quality)
+                if (index == existingIndex) {
+                    frame.copy(quantity = frame.quantity + quality)
                 } else
                     frame
             }
@@ -76,9 +80,8 @@ class PriceViewModel : ViewModel() {
         selectedFrames = selectedFrames.minus(frame)
     }
 
-
     //updateQuantity
-    fun updateQuantity(frame: SelectedFrame, newQuantity: Int) {
+    fun updateFrameQuantity(frame: SelectedFrame, newQuantity: Int) {
 
         if (newQuantity <= 0) {
             removeFrame(frame)
@@ -93,7 +96,8 @@ class PriceViewModel : ViewModel() {
         selectedFrames = emptyList()
     }
 
-    fun addCake(category: String, subType: String? = null, quantity: Int = 1){
+    //add cakes
+    fun addCake(category: String, subType: String? = null, quantity: Int = 1) {
         val price = when {
             category == "birthday_cake" && subType != null -> {
                 prices?.cakes?.birthday_cake?.let { cake ->
@@ -128,11 +132,11 @@ class PriceViewModel : ViewModel() {
             selectedCakes = selectedCakes.mapIndexed { index, cake ->
                 if (index == existingIndex) {
                     cake.copy(quantity = cake.quantity + quantity)
-                }else {
+                } else {
                     cake
                 }
             }
-        }else{
+        } else {
             val newCake = SelectedCake(
                 category = category,
                 subType = subType,
@@ -144,29 +148,80 @@ class PriceViewModel : ViewModel() {
 
 
 
-        fun clearCakes(){
+        fun clearCakes() {
             selectedCakes = emptyList()
         }
     }
 
-    fun removeCake(cake: SelectedCake){
+    fun removeCake(cake: SelectedCake) {
         selectedCakes = selectedCakes.minus(cake)
     }
 
     fun updateCakeQuantity(cake: SelectedCake, newQuantity: Int) {
-        if (newQuantity <= 0){
+        if (newQuantity <= 0) {
             removeCake(cake)
-        }else{
+        } else {
             selectedCakes = selectedCakes.map {
                 if (it == cake) it.copy(quantity = newQuantity) else it
             }
         }
     }
 
+    fun addGift(category: String, quantity: Int = 1){
+        val price = prices?.gifts?.let { gifts ->
+            when(category){
+                "customized_bouquet" -> gifts.customized_bouquet.price
+                "personalized_clock" -> gifts.personalized_clock.price
+                "baby_photo_collage" -> gifts.baby_photo_collage.price
+                "customized_chocolate" -> gifts.customized_chocolate.price
+                "spotify_frame" -> gifts.spotify_frame.price
+                else -> null
+            }
+        }
+
+        val existingIndex = selectedGifts.indexOfFirst {
+            it.category == category
+        }
+
+        if (existingIndex != -1){
+            selectedGifts = selectedGifts.mapIndexed { index, gifts ->
+                if (index == existingIndex){
+                    gifts.copy(quantity = gifts.quantity + quantity)
+                }else
+                    gifts
+            }
+        }else{
+            val newGift = SelectedGifts(
+                category = category,
+                price = price,
+                quantity = quantity
+            )
+            selectedGifts = selectedGifts.plus(newGift)
+        }
+    }
+
+    fun removeGift(gift: SelectedGifts){
+        selectedGifts = selectedGifts.minus(gift)
+    }
+
+    fun updateGiftQuantity(gifts: SelectedGifts, newQuantity: Int){
+        if (newQuantity<=0){
+            removeGift(gifts)
+        }else{
+            selectedGifts = selectedGifts.map {
+                if (it == gifts) it.copy(quantity = newQuantity) else it
+            }
+        }
+    }
+
+    fun clearGifts(){
+        selectedGifts = emptyList()
+    }
     fun getTotalPrice(): Double {
         val frameTotal = selectedFrames.sumOf { (it.price?.toDouble() ?: 0.0) * it.quantity }
         val cakeTotal = selectedCakes.sumOf { (it.price?.toDouble() ?: 0.0) * it.quantity }
-        return frameTotal + cakeTotal
+        val giftTotal = selectedGifts.sumOf { (it.price?.toDouble() ?: 0.0) * it.quantity }
+        return frameTotal + cakeTotal + giftTotal
     }
 
 }

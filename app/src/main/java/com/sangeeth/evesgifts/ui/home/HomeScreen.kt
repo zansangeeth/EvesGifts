@@ -1,25 +1,19 @@
 package com.sangeeth.evesgifts.ui.home
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -40,6 +34,8 @@ fun HomeScreen(
 ) {
     val selectedFrames = viewModel.selectedFrames
     val selectedCake = viewModel.selectedCakes
+    val selectedGifts = viewModel.selectedGifts
+
     Scaffold(
         floatingActionButton = { FloatingActionButton(viewModel) }
     ) {
@@ -83,7 +79,7 @@ fun HomeScreen(
             Column {
                 Text("Frames Details")
 
-                if (viewModel.selectedFrames.isEmpty() && viewModel.selectedCakes.isEmpty()) {
+                if (viewModel.selectedFrames.isEmpty() && viewModel.selectedCakes.isEmpty() && viewModel.selectedGifts.isEmpty()) {
                     Text("no items selected yet")
                 } else {
                     Column(
@@ -104,7 +100,7 @@ fun HomeScreen(
                                 },
                                 quantity = frame.quantity,
                                 onQuantityChange = { newQuantity ->
-                                    viewModel.updateQuantity(
+                                    viewModel.updateFrameQuantity(
                                         frame = frame,
                                         newQuantity = newQuantity
                                     )
@@ -130,6 +126,22 @@ fun HomeScreen(
                                 },
                                 onDelete = {
                                     viewModel.removeCake(cake = cake)
+                                }
+                            )
+                        }
+
+                        selectedGifts.forEach { gifts ->
+                            AddedItemCardView(
+                                item = gifts.category.replace("_", " ").replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale = Locale.ROOT) else it.toString() }
+                                    ?: "",
+                                size = "Gift",
+                                price = gifts.price ?: "N/A",
+                                quantity = gifts.quantity,
+                                onQuantityChange = { newQuantity ->
+                                    viewModel.updateGiftQuantity(gifts, newQuantity)
+                                },
+                                onDelete = {
+                                    viewModel.removeGift(gifts)
                                 }
                             )
                         }

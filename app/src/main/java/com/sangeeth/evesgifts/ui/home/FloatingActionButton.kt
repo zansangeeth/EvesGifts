@@ -131,7 +131,12 @@ fun FloatingActionButton(
         }
 
         "Gifts" -> {
-            GiftsScreen(onDismiss = { selectedItem = null })
+            GiftsScreen(
+                onDismiss = { selectedItem = null },
+                onConfirm = { category ->
+                    viewModel.addGift(category)
+                }
+            )
         }
     }
 }
