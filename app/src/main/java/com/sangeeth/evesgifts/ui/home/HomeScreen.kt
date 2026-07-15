@@ -1,15 +1,10 @@
 package com.sangeeth.evesgifts.ui.home
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldLineLimits
@@ -21,10 +16,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -32,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sangeeth.evesgifts.R
 import com.sangeeth.evesgifts.data.PriceViewModel
-import com.sangeeth.evesgifts.utils.PDFGenerator
+import com.sangeeth.evesgifts.utils.pdfGenerator
 import java.util.Locale
 import kotlin.text.replace
 
@@ -45,6 +43,9 @@ fun HomeScreen(
     val selectedFrames = viewModel.selectedFrames
     val selectedCake = viewModel.selectedCakes
     val selectedGifts = viewModel.selectedGifts
+
+    val context = LocalContext.current
+    val customerName = rememberTextFieldState()
 
     Scaffold(
 //        floatingActionButton = { FloatingActionButton(viewModel) }
@@ -80,7 +81,7 @@ fun HomeScreen(
                 )
 
             OutlinedTextField(
-                state = rememberTextFieldState(),
+                state = customerName,
                 modifier = Modifier
                     .padding(top = 20.dp)
                     .fillMaxWidth(),
@@ -221,7 +222,15 @@ fun HomeScreen(
                     GenerateQuoteButton(
                         hasItems = selectedFrames.isNotEmpty() || selectedGifts.isNotEmpty() || selectedCake.isNotEmpty(),
                         onClick = {
-                            PDFGenerator()
+                            pdfGenerator(
+                                context = context,
+                                quotationId = "Q-${System.currentTimeMillis()}",
+                                customerName = customerName.text.toString(),
+                                frames = selectedFrames,
+                                cakes = selectedCake,
+                                gifts = selectedGifts,
+                                totalPrice = viewModel.getTotalPrice()
+                            )
                         }
                     )
                 }

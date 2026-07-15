@@ -2,27 +2,20 @@ package com.sangeeth.evesgifts.utils
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
+import android.icu.text.SimpleDateFormat
 import android.os.Environment
-import android.widget.Toast
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.intl.Locale
 import androidx.core.content.FileProvider
-import com.sangeeth.evesgifts.R
 import com.sangeeth.evesgifts.data.SelectedCake
 import com.sangeeth.evesgifts.data.SelectedFrame
 import com.sangeeth.evesgifts.data.SelectedGifts
-import android.graphics.*
-import android.icu.text.SimpleDateFormat
-import android.provider.CalendarContract
 import java.io.File
 import java.io.FileOutputStream
 import java.util.Date
 
 
-fun PDFGenerator(
+fun pdfGenerator(
     context: Context,
     quotationId: String,
     customerName: String,
@@ -115,7 +108,7 @@ fun PDFGenerator(
 
     cakes.forEach { cake ->
         canvas.drawText(cake.category, 40f, y, textPaint)
-        canvas.drawText(cake.subType!!, 230f, y, textPaint)
+//        canvas.drawText(cake.subType!!, 230f, y, textPaint)
         canvas.drawText(cake.quantity.toString(), 360f, y, textPaint)
 
         val total = (cake.price?.toDouble() ?: 0.0) * cake.quantity
