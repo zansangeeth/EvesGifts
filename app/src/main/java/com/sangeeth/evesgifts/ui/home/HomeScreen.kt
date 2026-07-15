@@ -59,7 +59,8 @@ fun HomeScreen(
     val quotationId = "Q-${System.currentTimeMillis()}"
 
     val hasCustomerName = customerName.text.isNotBlank()
-    val hasItems = selectedFrames.isNotEmpty() || selectedGifts.isNotEmpty() || selectedCake.isNotEmpty()
+    val hasItems =
+        selectedFrames.isNotEmpty() || selectedGifts.isNotEmpty() || selectedCake.isNotEmpty()
 
     val savePdf = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("application/pdf")
@@ -83,7 +84,10 @@ fun HomeScreen(
             saveQuotation(
                 quotationId = quotationId,
                 customerName = customerName.text.toString(),
-                totalPrice = viewModel.getTotalPrice(),
+                frames = selectedFrames,
+                cakes = selectedCake,
+                gifts = selectedGifts,
+                totalPrice = viewModel.getTotalPrice()
 //                        pdfUrl = pdfUrl
             ) {
                 isGenerating = false
@@ -271,7 +275,7 @@ fun HomeScreen(
                     }
 //                    Spacer(modifier = Modifier.height(12.dp))
                     GenerateQuoteButton(
-                        hasItems =  hasItems && hasCustomerName,
+                        hasItems = hasItems && hasCustomerName,
                         loading = isGenerating,
                         onClick = {
                             isGenerating = true
