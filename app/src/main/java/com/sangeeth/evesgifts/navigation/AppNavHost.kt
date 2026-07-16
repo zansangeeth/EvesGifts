@@ -8,12 +8,14 @@ import androidx.navigation.compose.composable
 import com.sangeeth.evesgifts.data.PriceViewModel
 import com.sangeeth.evesgifts.ui.home.HomeScreen
 import com.sangeeth.evesgifts.ui.orders.OrdersScreen
+import com.sangeeth.evesgifts.ui.orders.OrdersViewModel
 import com.sangeeth.evesgifts.ui.profile.ProfileScreen
 
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    priceViewModel: PriceViewModel = viewModel()
+    priceViewModel: PriceViewModel = viewModel(),
+    ordersViewModel: OrdersViewModel = viewModel()
 ) {
 
     NavHost(
@@ -24,7 +26,7 @@ fun AppNavHost(
             HomeScreen(priceViewModel)
         }
         composable(AppDestination.Orders.route) {
-            OrdersScreen()
+            OrdersScreen(ordersViewModel)
         }
         composable(AppDestination.Profile.route) {
             ProfileScreen()

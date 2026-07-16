@@ -6,6 +6,6 @@ import com.sangeeth.evesgifts.data.Quotation
 sealed class OrdersUIState {
     object Loading : OrdersUIState()
     data class Success(val quotations: List<Quotation>): OrdersUIState()
-    data class Error(val message: Message): OrdersUIState()
+    data class Error(val message: String): OrdersUIState()
     object Empty: OrdersUIState()
 }

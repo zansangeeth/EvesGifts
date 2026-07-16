@@ -42,7 +42,7 @@ fun saveQuotation(
         "cakes" to cakes.map {
             hashMapOf(
                 "category" to it.category,
-                "subType" to it.subType,
+                "subType" to it.subType!!,
                 "quantity" to it.quantity,
                 "price" to it.price,
             )
