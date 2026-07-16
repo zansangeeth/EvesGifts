@@ -1,7 +1,7 @@
 package com.sangeeth.evesgifts.ui.orders
 
-import android.R
 import android.icu.text.SimpleDateFormat
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -27,10 +26,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.sangeeth.evesgifts.R
 import com.sangeeth.evesgifts.data.Quotation
-import java.nio.file.WatchEvent
 import java.util.Date
 
 @Composable
@@ -128,21 +128,28 @@ fun QuotationCard(quotation: Quotation) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-    ) {
+            .padding(16.dp),
+        border = BorderStroke(width = 1.dp, color = colorResource(R.color.primary_color)),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 5.dp
+        )
+
+        ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Column(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(8.dp)
             ) {
                 Text(
                     text = quotation.customerName.ifEmpty { "No Name" },
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = colorResource(R.color.primary_color),
                     maxLines = 1
                 )
 
@@ -155,6 +162,7 @@ fun QuotationCard(quotation: Quotation) {
 
             quotation.createdAt?.let { timestamp ->
                 Text(
+                    modifier = Modifier.padding(8.dp),
                     text = formatDate(timestamp.toDate()),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -165,7 +173,9 @@ fun QuotationCard(quotation: Quotation) {
         Spacer(modifier = Modifier.height(12.dp))
 
         Card(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
             shape = RoundedCornerShape(8.dp),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.5f)
@@ -196,21 +206,24 @@ fun QuotationCard(quotation: Quotation) {
         Spacer(modifier = Modifier.height(12.dp))
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Total",
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
+                color = colorResource(R.color.primary_color)
             )
 
             Text(
                 text = "LKR ${String.format("%.2f", quotation.totalPrice)}",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = colorResource(R.color.primary_color)
             )
         }
 
@@ -223,10 +236,15 @@ fun QuotationCard(quotation: Quotation) {
             )
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(
+                    alignment = Alignment.CenterHorizontally,
+                    space = 8.dp
+                )
             ) {
-                if (quotation.frames.isNotEmpty()){
+                if (quotation.frames.isNotEmpty()) {
                     Text(
                         text = "🖼️ ${quotation.frames.size} frame(s)",
                         style = MaterialTheme.typography.bodySmall,
@@ -234,7 +252,7 @@ fun QuotationCard(quotation: Quotation) {
                     )
                 }
 
-                if (quotation.cakes.isNotEmpty()){
+                if (quotation.cakes.isNotEmpty()) {
                     Text(
                         text = "🎂 ${quotation.cakes.size} cake(s)",
                         style = MaterialTheme.typography.bodySmall,
@@ -242,7 +260,7 @@ fun QuotationCard(quotation: Quotation) {
                     )
                 }
 
-                if (quotation.gifts.isNotEmpty()){
+                if (quotation.gifts.isNotEmpty()) {
                     Text(
                         text = "🎁 ${quotation.gifts.size} gift(s)",
                         style = MaterialTheme.typography.bodySmall,
