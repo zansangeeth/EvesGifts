@@ -12,7 +12,20 @@
           "package_name": "com.sangeeth.evesgifts"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "57022401073-9os3d2gfu5vls9qeqiglh9770q3lmj3i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sangeeth.evesgifts",
+            "certificate_hash": "74306ca4ab8ba9d6e4431ec1c983edc51e2ee97a"
+          }
+        },
+        {
+          "client_id": "57022401073-qjocefjlolej0msr2f7stlpvqmr4ge6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBNCSJK8k4zuR9Jhd8v1_y5nF4-pOJv2k0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57022401073-qjocefjlolej0msr2f7stlpvqmr4ge6u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
