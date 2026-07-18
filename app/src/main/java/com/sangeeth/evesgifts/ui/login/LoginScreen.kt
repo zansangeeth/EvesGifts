@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.sangeeth.evesgifts.navigation.AppDestination
 
 @Composable
 fun LoginScreen(
@@ -41,8 +42,8 @@ fun LoginScreen(
 
     LaunchedEffect(uiState) {
         if (uiState is LoginUIState.Success) {
-            navController.navigate("home") {
-                popUpTo("login") { inclusive = true }
+            navController.navigate(AppDestination.Home.route) {
+                popUpTo(AppDestination.Login.route) { inclusive = true }
             }
             viewModel.resetState()
         }

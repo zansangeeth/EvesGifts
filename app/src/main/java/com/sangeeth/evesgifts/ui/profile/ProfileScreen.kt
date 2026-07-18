@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.sangeeth.evesgifts.navigation.AppDestination
 
 @Composable
 fun ProfileScreen(
@@ -32,8 +33,8 @@ fun ProfileScreen(
 
     LaunchedEffect(logoutEvent) {
         if (logoutEvent) {
-            navController.navigate("login") {
-                popUpTo("home") { inclusive = true }
+            navController.navigate(AppDestination.Login.route) {
+                popUpTo(AppDestination.Home.route) { inclusive = true }
             }
             viewModel.resetLogoutEvent()
         }
@@ -54,7 +55,7 @@ fun ProfileScreen(
                 val data = uiState as ProfileUIState.Success
                 Text("User Name: ${data.diaplayName}", style = MaterialTheme.typography.headlineSmall)
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("Email: ${data.diaplayName}", style = MaterialTheme.typography.bodyLarge)
+                Text("Email: ${data.email}", style = MaterialTheme.typography.bodyLarge)
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(

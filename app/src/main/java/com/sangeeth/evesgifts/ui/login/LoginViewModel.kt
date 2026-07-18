@@ -1,6 +1,5 @@
 package com.sangeeth.evesgifts.ui.login
 
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -18,7 +17,10 @@ class LoginViewModel(
     val uiState: StateFlow<LoginUIState> = _uiState.asStateFlow()
 
     fun login(email: String, password: String) {
-        if (email.isBlank() || password.isBlank()) {
+
+        val trimmedEmail = email.trim()
+        val trimmedPassword = password.trim()
+        if (trimmedEmail.isBlank() || trimmedPassword.isBlank()) {
             _uiState.value = LoginUIState.Error("Email ad password cannot be empty")
             return
         }
@@ -26,7 +28,7 @@ class LoginViewModel(
         viewModelScope.launch {
             _uiState.value = LoginUIState.Loading
             try {
-                val result=  auth.signInWithEmailAndPassword(email, password).await()
+                val result=  auth.signInWithEmailAndPassword(trimmedEmail, trimmedPassword).await()
                 val user = result.user
                 if (user != null){
                     _uiState.value = LoginUIState.Success(user)

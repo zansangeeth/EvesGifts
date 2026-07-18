@@ -83,6 +83,6 @@ dependencies {
     // Add the dependency for the Cloud Storage library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation(libs.firebase.storage)
-    implementation(libs.firebase.auth.ktx)
+//    implementation(libs.firebase.auth.ktx)
 
 }
