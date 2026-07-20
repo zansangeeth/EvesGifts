@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.sangeeth.evesgifts.navigation.AppDestination
 import com.sangeeth.evesgifts.navigation.AppNavHost
 import com.sangeeth.evesgifts.navigation.BottomBar
@@ -26,6 +27,14 @@ class MainActivity : ComponentActivity() {
 
             val showBottomBar = currentRoute != AppDestination.Login.route
 
+            val isLoggedIn = FirebaseAuth.getInstance().currentUser != null
+
+            val startDestination = if (isLoggedIn) {
+                AppDestination.Home.route
+            }else{
+                AppDestination.Login.route
+            }
+
             Scaffold(
                 bottomBar = {
                     if (showBottomBar){
@@ -34,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 },
 
                 ) { innerPadding ->
-                AppNavHost(navController, modifier = Modifier.padding(innerPadding))
+                AppNavHost(navController, modifier = Modifier.padding(innerPadding), startDestination = startDestination)
             }
         }
     }

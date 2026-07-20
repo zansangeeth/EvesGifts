@@ -18,6 +18,7 @@ import com.sangeeth.evesgifts.ui.profile.ProfileViewModel
 fun AppNavHost(
     navController: NavHostController,
     modifier: androidx.compose.ui.Modifier,
+    startDestination: String = AppDestination.Login.route,
     priceViewModel: PriceViewModel = viewModel(),
     ordersViewModel: OrdersViewModel = viewModel(),
     profileViewModel: ProfileViewModel = viewModel(),
@@ -26,7 +27,7 @@ fun AppNavHost(
 
     NavHost(
         navController = navController,
-        startDestination = AppDestination.Login.route,
+        startDestination = startDestination,
     ) {
         composable(AppDestination.Login.route) {
             LoginScreen(navController = navController, viewModel = loginViewModel)
