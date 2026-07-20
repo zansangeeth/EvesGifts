@@ -68,7 +68,7 @@ fun LoginScreen(
         Image(
             painter = painterResource(R.drawable.logo),
             contentDescription = "App Logo",
-            modifier = Modifier.size(120.dp)
+            modifier = Modifier.size(200.dp)
                 .padding(bottom = 32.dp),
             contentScale = ContentScale.Fit
         )
