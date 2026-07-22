@@ -42,8 +42,8 @@ The following **extensions** need to be implemented:
 
 ## Google Play Screenshots
 
-Screen | Landscape                                                 |
---- |-----------------------------------------------------------|
+Screen | Google Play                                   |
+--- |-----------------------------------------------|
 Images | <img src="/images/google_play.png" alt="tab"> |
 
 ## Image Walkthrough
