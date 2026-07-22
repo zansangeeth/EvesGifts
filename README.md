@@ -55,26 +55,9 @@ TBA
 
 Here's a walkthrough of implemented user stories:
 
-<table>
-  <tr>
-    <th>Screen</th>
-    <th>Login</th>
-    <th>Home View</th>
-    <th>Home with FAB</th>
-    <th>Orders</th>
-    <th>Profile</th>
-    <th>Quotation PDF</th>
-  </tr>
-  <tr>
-    <td>Images</td>
-    <td>![Sign In](/images/login.png)</td>
-    <td>![home](/images/home_with_items.png)</td>
-    <td>![fab](/images/fab.png)</td>
-    <td>![orders](/images/past_orders.png)</td>
-    <td>![profile](/images/login.png)</td>
-    <td>![quote](/images/quote1.png)</td>
-  </tr>
-</table>
+| Screen    | Login    | Home View    | Home with FAB    | Orders    |
+|---|---|---|---|---|
+| Images    | ![Sign In](/images/login.png)    | ![home](/images/home_with_items.png) | ![fab](/images/fab.png) | ![orders](/images/past_orders.png) |
 
 
 # Screenshots Tablet
