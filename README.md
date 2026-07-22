@@ -39,17 +39,12 @@ The following **extensions** need to be implemented:
 * [ ] view past quotations
 
 
-## Video walkthrough for potrait
 
-TAB
+## Google Play Screenshots
 
-## Video walkthrough for session time out
-
-TBA
-
-## Video walkthrough for landscape
-
-TBA
+Screen | Landscape                                                 |
+--- |-----------------------------------------------------------|
+Images | <img src="/images/google_play.png" alt="tab"> |
 
 ## Image Walkthrough
 
@@ -58,6 +53,7 @@ Here's a walkthrough of implemented user stories:
 | Screen    | Login    | Home View    | Home with FAB    | Orders    | Quote                         | Profile |
 |---|---|---|---|---|-------------------------------|---------|
 | Images    | <img src="/images/login.png" width="150" alt="Sign In">    | <img src="/images/home_with_items.png" width="150" alt="home"> | <img src="/images/fab.png" width="150" alt="fab"> | <img src="/images/past_orders.png" width="150" alt="orders"> | <img src="/images/quote1.png" width="150" alt="quote"> | <img src="/images/profile.png" width="150" alt="profile"> |
+
 # Screenshots Tablet
 Screen | Landscape                                              |
 --- |--------------------------------------------------------|
