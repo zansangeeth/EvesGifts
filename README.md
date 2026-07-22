@@ -59,9 +59,9 @@ Here's a walkthrough of implemented user stories:
 |---|---|---|---|---|-------------------------------|---------|
 | Images    | <img src="/images/login.png" width="150" alt="Sign In">    | <img src="/images/home_with_items.png" width="150" alt="home"> | <img src="/images/fab.png" width="150" alt="fab"> | <img src="/images/past_orders.png" width="150" alt="orders"> | <img src="/images/quote1.png" width="150" alt="quote"> | <img src="/images/profile.png" width="150" alt="profile"> |
 # Screenshots Tablet
-Screen | Landscape |
---- |-------------------|
-Images | TBA               |
+Screen | Landscape                                              |
+--- |--------------------------------------------------------|
+Images | <img src="/images/tab_view.png" width="150" alt="tab"> |
 
 ## Workflow Diagram
 
